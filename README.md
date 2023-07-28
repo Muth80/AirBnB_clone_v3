@@ -7,6 +7,10 @@ The console is the first segment of the AirBnB project at Holberton School that 
 * Do operations on objects (count, compute stats, etc...)
 * Update attributes of an object
 * Destroy an object
+* 5,213 assertions (as of 08/20/2018)
+* 13,061 assertions (as of 01/25/2021)
+* Update DBStorage and FileStorage, adding two new methods
+* 
 
 ## Table of Content
 * [Environment](#environment)
@@ -154,9 +158,9 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
-Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
-Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
+David Muindi - [Github](https://github.com/Muth80) / [Twitter](https://twitter.com/muindidiego)  
 
-Second part of Airbnb: Joann Vuong
+
+Second part of Airbnb: David Muindi
 ## License
 Public Domain. No copy write protection. 
