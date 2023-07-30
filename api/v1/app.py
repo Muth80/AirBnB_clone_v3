@@ -1,30 +1,20 @@
 #!/usr/bin/python3
 
-# app.py
-
-from flask import Flask, jsonify
-from models import storage
+from flask import Flask
 from api.v1.views import app_views
+from models import storage
 
-# Create a Flask instance
 app = Flask(__name__)
-
-# Register the blueprint app_views to the Flask instance app
-app.register_blueprint(app_views, url_prefix='/api/v1')
+app.register_blueprint(app_views)
 
 
-# Method to handle teardown_appcontext, calls storage.close()
 @app.teardown_appcontext
-def teardown_app_context(exception):
-    """Closes the storage"""
+def teardown_appcontext(exception):
+    """Closes the storage session."""
     storage.close()
 
-
 if __name__ == "__main__":
-    # Define host and port using environment variables or default values
-    host = os.environ.get('HBNB_API_HOST', '0.0.0.0')
-    port = int(os.environ.get('HBNB_API_PORT', 5000))
-
-    # Run the Flask server
+    host = os.getenv("HBNB_API_HOST", "0.0.0.0")
+    port = int(os.getenv("HBNB_API_PORT", "5000"))
     app.run(host=host, port=port, threaded=True)
 
