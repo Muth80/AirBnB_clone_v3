@@ -37,6 +37,51 @@ class TestFileStorageDocs(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
+   @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get(self):
+        """Test the get() method of FileStorage"""
+        storage = FileStorage()
+
+        # Create an object and save it in the __objects dictionary
+        test_obj = BaseModel()
+        storage.new(test_obj)
+        test_id = test_obj.id
+
+        # Test retrieving an existing object by class and id
+        obj_found = storage.get(BaseModel, test_id)
+        self.assertEqual(obj_found, test_obj)
+
+        # Test retrieving a non-existing object by class and id
+        obj_not_found = storage.get(BaseModel, "invalid_id")
+        self.assertIsNone(obj_not_found)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count(self):
+        """Test the count() method of FileStorage"""
+        storage = FileStorage()
+
+        # Create multiple objects and save them in the __objects dictionary
+        for _ in range(3):
+            storage.new(BaseModel())
+            storage.new(State())
+            storage.new(City())
+
+        # Test counting all objects
+        count_all = storage.count()
+        self.assertEqual(count_all, 9)
+
+        # Test counting objects for a specific class
+        count_states = storage.count(State)
+        count_cities = storage.count(City)
+        count_base_models = storage.count(BaseModel)
+        self.assertEqual(count_states, 3)
+        self.assertEqual(count_cities, 3)
+        self.assertEqual(count_base_models, 3)
+
+        # Test counting objects for an invalid class
+        count_invalid = storage.count("InvalidClass")
+        self.assertEqual(count_invalid, 0)
+
     def test_pep8_conformance_test_file_storage(self):
         """Test tests/test_models/test_file_storage.py conforms to PEP8."""
         pep8s = pep8.StyleGuide(quiet=True)
