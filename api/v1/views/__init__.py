@@ -12,3 +12,4 @@ from api.v1.views.index import *
 from api.v1.views.states import  # Add this line to import the states view
 from api.v1.views.cities import  # Add this line to import the cities view
 from api.v1.views.amenities import  # Add this line to import the amenities view
+from api.v1.views.users import  # Add this line to import the users view
